@@ -1,17 +1,4 @@
-function updateStats() {
-      document.getElementById('score').textContent = score;
-      document.getElementById('streak').textContent = streak;
-      document.getElementById('perfect').textContent = Object.keys(perfectScores).length;
-    }
-
-    function updateTrophies() {
-      Object.keys(perfectScores).forEach(modeId => {
-        const trophy = document.getElementById(`trophy-${modeId}`);
-        if (trophy && perfectScores[modeId]) {
-          trophy.classList.add('show');
-        }
-      });
-    }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
