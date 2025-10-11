@@ -765,15 +765,37 @@
     let perfectScores = {};
     let correctAnswers = 0;
 
+    // FIXED: Load data on page load
     async function loadData() {
       try {
+        // FIXED: Changed to lowercase 'data.json'
         const response = await fetch('data.json');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         grammarData = await response.json();
-        console.log('✅ Data loaded successfully');
+        console.log('✅ Data loaded successfully', grammarData);
       } catch (error) {
         console.error('❌ Error loading data.json:', error);
-        alert('Error loading data.json. Make sure the file exists in the same folder.');
+        showFeedback('⚠️ Error loading data. Check console for details.', true);
       }
+    }
+
+    // FIXED: Added updateStats function
+    function updateStats() {
+      document.getElementById('score').textContent = score;
+      document.getElementById('streak').textContent = streak;
+      document.getElementById('perfect').textContent = Object.keys(perfectScores).length;
+    }
+
+    // FIXED: Added updateTrophies function
+    function updateTrophies() {
+      Object.keys(perfectScores).forEach(modeId => {
+        const trophy = document.getElementById(`trophy-${modeId}`);
+        if (trophy) {
+          trophy.classList.add('show');
+        }
+      });
     }
 
     function openMode(modeId) {
@@ -795,6 +817,11 @@
       correctAnswers = 0;
 
       const mode = grammarData.modes[modeId];
+      if (!mode) {
+        showFeedback('⚠️ Mode not found!', true);
+        return;
+      }
+
       document.getElementById('modalTitle').textContent = mode.title;
       document.getElementById('modalOverlay').classList.add('show');
       document.getElementById('exerciseModal').classList.add('show');
@@ -949,7 +976,6 @@
         updateTrophies();
         showFeedback('🏆 Perfect Score! 100%!', false);
         
-        // Trophy animation
         const trophy = document.getElementById(`trophy-${currentMode}`);
         if (trophy) {
           trophy.classList.add('show');
@@ -1046,8 +1072,10 @@
 
     document.getElementById('downloadQrBtn').addEventListener('click', downloadQRCode);
 
-    // Don't auto-load data - only load when button clicked
-    // loadData();
+    // FIXED: Load data when page loads
+    window.addEventListener('DOMContentLoaded', () => {
+      loadData();
+    });
   </script>
 </body>
 </html>
