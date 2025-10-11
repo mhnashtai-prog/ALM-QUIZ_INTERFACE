@@ -1,1 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gap Master - INTUITY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    body {
+      font-family: 'DM Sans', 'Inter', -apple-system, sans-serif;
+      background: #0d0d0d;
+      color: white;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      touch-action: pan-y;
+    }
+
+    .background {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 30% 20%, rgba(201, 169, 97, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(201, 169, 97, 0.06) 0%, transparent 45%),
+                  #0d0d0d;
+      z-index: 0;
+    }
+
+    .stars {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(201, 169, 97, 0.6);
+      border-radius: 50%;
+      animation: twinkle 3s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      padding: 0 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+      position: sticky;
+      top: 0;
+      background: rgba(13, 13, 13, 0.8);
+      backdrop-filter: blur(20px);
+      z-index: 10;
+      margin: 0 -1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .back-btn, .home-btn {
+      background: rgba(28, 28, 30, 0.6);
+      backdrop-filter: blur(40px);
+      border: 1px solid rgba(84, 84, 88, 0.25);
+      border-radius: 0.75rem;
+      padding: 0.625rem 1rem;
+      color: #C9A961;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      text-decoration: none;
+    }
+
+    .back-btn:hover, .home-btn:hover {
+      background: rgba(201, 169, 97, 0.15);
+      border-color: rgba(201, 169, 97, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #C9A961;
+      letter-spacing: 2px;
+    }
+
+    .quiz-header {
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-bottom: 1rem;
+    }
+
+    .quiz-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #C9A961;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .quiz-subtitle {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 500;
+    }
+
+    .progress-section {
+      background: rgba(28, 28, 30, 0.6);
+      backdrop-filter: blur(40px);
+      border: 1px solid rgba(84, 84, 88, 0.25);
+      border-radius: 1rem;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-text {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #8e8e93;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .progress-bar-bg {
+      background: rgba(255, 255, 255, 0.05);
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+
+    .progress-bar-fill {
+      background: linear-gradient(90deg, #C9A961 0%, rgba(201, 169, 97, 0.7) 100%);
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 10px rgba(201, 169, 97, 0.5);
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: space-around;
+      font-size: 0.75rem;
+      color: #8e8e93;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .stat-value {
+      color: #C9A961;
+      font-weight: 700;
+    }
+
+    .combo-meter {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(201, 169, 97, 0.15) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 1rem;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      display: none;
+      animation: pulse 1s infinite;
+    }
+
+    .combo-meter.active {
+      display: block;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.02); opacity: 0.9; }
+    }
+
+    .combo-text {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #8B5CF6;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .sentence-card {
+      background: rgba(28, 28, 30, 0.6);
+      backdrop-filter: blur(40px);
+      border: 1px solid rgba(84, 84, 88, 0.25);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .sentence-label {
+      font-size: 0.6875rem;
+      color: #8e8e93;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .sentence-text {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: #e5e5e7;
+      font-weight: 500;
+      text-align: center;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .gap {
+      display: inline-flex;
+      min-width: 100px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px dashed rgba(201, 169, 97, 0.3);
+      border-radius: 0.625rem;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0.75rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gap.active {
+      background: rgba(201, 169, 97, 0.2);
+      border-color: rgba(201, 169, 97, 0.6);
+      border-style: solid;
+      transform: scale(1.05);
+      box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2);
+      animation: pulse-gap 1s infinite;
+    }
+
+    @keyframes pulse-gap {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.2); }
+      50% { box-shadow: 0 0 0 6px rgba(201, 169, 97, 0.1); }
+    }
+
+    .gap:hover:not(.correct):not(.wrong) {
+      background: rgba(201, 169, 97, 0.1);
+      border-color: rgba(201, 169, 97, 0.5);
+      transform: scale(1.05);
+    }
+
+    .gap.filled {
+      background: rgba(201, 169, 97, 0.15);
+      border-style: solid;
+      border-color: rgba(201, 169, 97, 0.4);
+      cursor: pointer;
+    }
+
+    .gap.filled:hover {
+      background: rgba(201, 169, 97, 0.2);
+      transform: scale(1.05);
+    }
+
+    .gap.correct {
+      background: rgba(29, 211, 192, 0.15);
+      border-color: #1DD3C0;
+      animation: celebrate 0.6s;
+    }
+
+    .gap.wrong {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.6);
+      animation: shake 0.5s;
+    }
+
+    @keyframes celebrate {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .gap-word {
+      font-weight: 600;
+      color: #C9A961;
+      font-size: 0.9375rem;
+    }
+
+    .gap.correct .gap-word {
+      color: #1DD3C0;
+    }
+
+    .gap.wrong .gap-word {
+      color: rgba(239, 68, 68, 0.9);
+    }
+
+    .remove-word {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 20px;
+      height: 20px;
+      background: rgba(239, 68, 68, 0.9);
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      color: white;
+      border: 2px solid #0d0d0d;
+    }
+
+    .gap.filled:hover .remove-word {
+      display: flex;
+    }
+
+    .word-bank-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .word-bank-label {
+      font-size: 0.75rem;
+      color: #8e8e93;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      text-align: center;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .word-type-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .word-type-tabs::-webkit-scrollbar { height: 4px; }
+    .word-type-tabs::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 4px; }
+    .word-type-tabs::-webkit-scrollbar-thumb { background: rgba(201, 169, 97, 0.3); border-radius: 4px; }
+
+    .type-tab {
+      background: rgba(28, 28, 30, 0.5);
+      border: 1px solid rgba(84, 84, 88, 0.25);
+      border-radius: 0.625rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .type-tab.active {
+      background: rgba(201, 169, 97, 0.2);
+      border-color: rgba(201, 169, 97, 0.4);
+      color: #C9A961;
+    }
+
+    .type-tab.verb { color: #C9A961; }
+    .type-tab.noun { color: #3B82F6; }
+    .type-tab.adverb { color: #8B5CF6; }
+    .type-tab.other { color: #8e8e93; }
+
+    .word-bank {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 0.625rem;
+      min-height: 80px;
+    }
+
+    .word-tile {
+      background: rgba(28, 28, 30, 0.6);
+      backdrop-filter: blur(40px);
+      border: 1px solid rgba(84, 84, 88, 0.25);
+      border-radius: 0.75rem;
+      padding: 0.75rem 0.625rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+      position: relative;
+    }
+
+    .word-tile.verb {
+      border-color: rgba(201, 169, 97, 0.3);
+      color: #C9A961;
+    }
+
+    .word-tile.noun {
+      border-color: rgba(59, 130, 246, 0.3);
+      color: #3B82F6;
+    }
+
+    .word-tile.adverb {
+      border-color: rgba(139, 92, 246, 0.3);
+      color: #8B5CF6;
+    }
+
+    .word-tile:hover:not(.disabled) {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .word-tile:active:not(.disabled) {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .word-tile.selected {
+      background: rgba(201, 169, 97, 0.25);
+      border-color: rgba(201, 169, 97, 0.6);
+      border-width: 2px;
+      transform: scale(1.08);
+      box-shadow: 0 4px 12px rgba(201, 169, 97, 0.4);
+    }
+
+    .word-tile.disabled {
+      opacity: 0.3;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+
+    .hint-box {
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 0.875rem;
+      padding: 0.875rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      display: none;
+    }
+
+    .hint-box.show {
+      display: block;
+      animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hint-icon {
+      color: #8B5CF6;
+      font-weight: 700;
+      margin-right: 0.25rem;
+    }
+
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .action-btn {
+      background: rgba(201, 169, 97, 0.15);
+      border: 1px solid rgba(201, 169, 97, 0.3);
+      border-radius: 0.875rem;
+      padding: 0.875rem 1rem;
+      color: #C9A961;
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .action-btn:hover:not(:disabled) {
+      background: rgba(201, 169, 97, 0.25);
+      border-color: rgba(201, 169, 97, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(201, 169, 97, 0.3);
+    }
+
+    .action-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .action-btn.hint {
+      background: rgba(139, 92, 246, 0.15);
+      border-color: rgba(139, 92, 246, 0.3);
+      color: #8B5CF6;
+    }
+
+    .action-btn.hint:hover:not(:disabled) {
+      background: rgba(139, 92, 246, 0.25);
+      border-color: rgba(139, 92, 246, 0.5);
+    }
+
+    .feedback-box {
+      background: rgba(28, 28, 30, 0.8);
+      backdrop-filter: blur(40px);
+      border: 1px solid rgba(84, 84, 88, 0.25);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      display: none;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .feedback-box.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .feedback-box.correct {
+      background: rgba(29, 211, 192, 0.1);
+      border-color: rgba(29, 211, 192, 0.3);
+    }
+
+    .feedback-box.wrong {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .feedback-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .feedback-box.correct .feedback-title {
+      color: #1DD3C0;
+    }
+
+    .feedback-box.wrong .feedback-title {
+      color: rgba(239, 68, 68, 0.9);
+    }
+
+    .feedback-text {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .grammar-note {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(84, 84, 88, 0.2);
+      font-size: 0.8125rem;
+      color: #8e8e93;
+    }
+
+    .next-btn {
+      background: rgba(201, 169, 97, 0.15);
+      border: 1px solid rgba(201, 169, 97, 0.3);
+      border-radius: 0.875rem;
+      padding: 1rem 1.5rem;
+      color: #C9A961;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'DM Sans', sans-serif;
+      width: 100%;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+
+    .next-btn.show {
+      display: block;
+    }
+
+    .next-btn:hover {
+      background: rgba(201, 169, 97, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .results-screen {
+      display: none;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .results-screen.show {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .results-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: bounce 1s;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .results-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #C9A961;
+      margin-bottom: 1rem;
+    }
+
+    .score-display {
+      background: rgba(28, 28, 30, 0.6);
+      backdrop-filter: blur(40px);
+      border: 1px solid rgba(84, 84, 88, 0.25);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      margin: 1.5rem 0;
+    }
+
+    .score-big {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #C9A961;
+      margin-bottom: 0.5rem;
+    }
+
+    .score-ratio {
+      font-size: 1.25rem;
+      color: #8e8e93;
+    }
+
+    .results-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .result-stat {
+      background: rgba(28, 28, 30, 0.4);
+      border: 1px solid rgba(84, 84, 88, 0.2);
+      border-radius: 0.875rem;
+      padding: 1rem;
+    }
+
+    .result-stat-label {
+      font-size: 0.6875rem;
+      color: #8e8e93;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .result-stat-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #C9A961;
+    }
+
+    .results-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 480px) {
+      .quiz-title {
+        font-size: 1.25rem;
+      }
+      
+      .sentence-text {
+        font-size: 1rem;
+      }
+
+      .word-bank {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+    <!-- Top Navigation -->
+    <div class="top-nav">
+      <a href="index.html" class="back-btn">
+        ← Main Menu
+      </a>
+      <div class="logo">INTUITY</div>
+      <a href="index.html" class="home-btn">
+        🏠 Home
+      </a>
+    </div>
+
+    <!-- Quiz Content -->
+    <div id="quizContent">
+      <div class="quiz-header">
+        <h1 class="quiz-title">
+          <span>✏️</span>
+          <span>Gap Master</span>
+        </h1>
+        <p class="quiz-subtitle">Drag words to complete sentences!</p>
+      </div>
+
+      <!-- Progress Section -->
+      <div class="progress-section">
+        <div class="progress-text" id="progressText">Question 1 of 15</div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBar" style="width: 6.67%"></div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-item">
+            Score: <span class="stat-value" id="scoreValue">0</span>
+          </div>
+          <div class="stat-item">
+            Streak: <span class="stat-value" id="streakValue">0</span>🔥
+          </div>
+          <div class="stat-item">
+            Perfect: <span class="stat-value" id="perfectValue">0</span>🏆
+          </div>
+        </div>
+      </div>
+
+      <!-- Combo Meter -->
+      <div class="combo-meter" id="comboMeter">
+        <div class="combo-text">🔥 COMBO x2! Keep going!</div>
+      </div>
+
+      <!-- Sentence Card -->
+      <div class="sentence-card">
+        <div class="sentence-label">📝 Complete the sentence:</div>
+        <div class="sentence-text" id="sentenceText"></div>
+      </div>
+
+      <!-- Hint Box -->
+      <div class="hint-box" id="hintBox">
+        <span class="hint-icon">💡</span>
+        <span id="hintText"></span>
+      </div>
+
+      <!-- Word Bank -->
+      <div class="word-bank-section">
+        <div class="word-bank-label">
+          <span>🎨 Drag words here:</span>
+        </div>
+        
+        <div class="word-type-tabs" id="wordTypeTabs">
+          <div class="type-tab active" data-type="all">All Words</div>
+          <div class="type-tab verb" data-type="verb">Verbs 🟡</div>
+          <div class="type-tab noun" data-type="noun">Nouns 🔵</div>
+          <div class="type-tab adverb" data-type="adverb">Adverbs 🟣</div>
+        </div>
+
+        <div class="word-bank" id="wordBank"></div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="action-btn" id="checkBtn" onclick="checkAnswer()" disabled>
+          ✓ Check Answer
+        </button>
+        <button class="action-btn hint" onclick="showHint()">
+          💡 Hint
+        </button>
+      </div>
+
+      <!-- Feedback -->
+      <div class="feedback-box" id="feedbackBox">
+        <div class="feedback-title" id="feedbackTitle"></div>
+        <div class="feedback-text" id="feedbackText"></div>
+        <div class="grammar-note" id="grammarNote"></div>
+      </div>
+
+      <!-- Next Button -->
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
+        Next Question →
+      </button>
+    </div>
+
+    <!-- Results Screen -->
+    <div class="results-screen" id="resultsScreen">
+      <div class="results-icon" id="resultsIcon">🎉</div>
+      <h2 class="results-title">Gap Master Complete!</h2>
+      
+      <div class="score-display">
+        <div class="score-big" id="finalScore">150</div>
+        <div class="score-ratio" id="finalRatio">15/15 Correct</div>
+      </div>
+
+      <div class="results-stats">
+        <div class="result-stat">
+          <div class="result-stat-label">Accuracy</div>
+          <div class="result-stat-value" id="accuracyValue">100%</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-label">Best Streak</div>
+          <div class="result-stat-value" id="bestStreakValue">15</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-label">Perfect</div>
+          <div class="result-stat-value" id="perfectCountValue">15</div>
+        </div>
+      </div>
+
+      <div class="results-actions">
+        <button class="action-btn" onclick="restartQuiz()">
+          🔄 Try Again
+        </button>
+        <a href="index.html" class="action-btn" style="text-align: center; display: block; text-decoration: none;">
+          🏠 Main Menu
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let questions = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let streak = 0;
+    let bestStreak = 0;
+    let perfectCount = 0;
+    let startTime = Date.now();
+    let currentQuestion = null;
+    let filledGaps = {};
+    let hintUsed = false;
+    let currentFilter = 'all';
+    let activeGapId = null;
+    let usedWords = {};
+
+    // Question Bank
+    const questionBank = [
+      // Simple Present - Habitual Actions
+      {
+        template: "Sarah loves coffee. She ___ drinks it every morning.",
+        gaps: [{ id: 1, answer: "always", type: "adverb" }],
+        words: ["always", "never", "rarely", "sometimes"],
+        hint: "She loves coffee and drinks it every morning - what frequency fits?",
+        explanation: "'Always' is correct because she drinks coffee EVERY morning without exception. She loves it!",
+        grammar: "Always = 100% frequency, matches 'every morning'"
+      },
+      {
+        template: "They live near the school. They ___ to school by bus.",
+        gaps: [{ id: 1, answer: "walk", type: "verb" }],
+        words: ["walk", "drive", "fly", "swim"],
+        hint: "They live NEAR the school. What makes sense?",
+        explanation: "'Walk' is correct because they live near the school, so they can walk. The sentence says 'by bus' is what they DON'T do.",
+        grammar: "Present Simple: they + verb (no s)"
+      },
+      {
+        template: "My brother hates sports. He ___ plays tennis on Saturdays.",
+        gaps: [{ id: 1, answer: "never", type: "adverb" }],
+        words: ["never", "always", "usually", "often"],
+        hint: "He HATES sports! Does he play tennis?",
+        explanation: "'Never' is correct because he hates sports, so he never plays tennis.",
+        grammar: "Never = 0% frequency, matches negative context"
+      },
+      {
+        template: "I'm very hungry in the morning. I ___ breakfast at 7 o'clock.",
+        gaps: [{ id: 1, answer: "have", type: "verb" }],
+        words: ["have", "skip", "forget", "miss"],
+        hint: "'I' needs a verb without 's'. What does a hungry person do?",
+        explanation: "'Have' is correct because hungry people eat breakfast, they don't skip it. With 'I', we use 'have' (no 's').",
+        grammar: "Present Simple: I + verb (no s)"
+      },
+      {
+        template: "She has a busy schedule. She ___ watches TV in the evening.",
+        gaps: [{ id: 1, answer: "rarely", type: "adverb" }],
+        words: ["rarely", "always", "never", "usually"],
+        hint: "Busy people don't have much free time...",
+        explanation: "'Rarely' is correct because busy people don't often watch TV - they have little free time.",
+        grammar: "Rarely = very low frequency (10-20%)"
+      },
+      // Multi-gap with context
+      {
+        template: "Tom is very active. He ___ to school and ___ his friends at the gate.",
+        gaps: [
+          { id: 1, answer: "runs", type: "verb" },
+          { id: 2, answer: "meets", type: "verb" }
+        ],
+        words: ["runs", "walks", "meets", "avoids", "drives", "ignores"],
+        hint: "He's ACTIVE (not lazy). Tom = he, so both verbs need 's'",
+        explanation: "Active people RUN (not walk), and friendly people MEET friends (not avoid them). Both get 's' for third person.",
+        grammar: "Present Simple third person: add 's' to both verbs"
+      },
+      {
+        template: "We love pizza! We ___ eat it on ___.",
+        gaps: [
+          { id: 1, answer: "often", type: "adverb" },
+          { id: 2, answer: "Fridays", type: "noun" }
+        ],
+        words: ["often", "never", "rarely", "Fridays", "Mondays", "Tuesdays"],
+        hint: "They LOVE pizza! When do people traditionally enjoy pizza?",
+        explanation: "'Often' matches 'love pizza'. 'Fridays' is a common pizza day tradition!",
+        grammar: "Days as habits use plural: on Fridays (every Friday)"
+      },
+      {
+        template: "My dad is very punctual. He ___ arrives ___ at work.",
+        gaps: [
+          { id: 1, answer: "always", type: "adverb" },
+          { id: 2, answer: "early", type: "adverb" }
+        ],
+        words: ["always", "never", "sometimes", "early", "late", "slowly"],
+        hint: "Punctual people are NEVER late! They come on time or...",
+        explanation: "Punctual people ALWAYS arrive EARLY (never late). First adverb = frequency, second = time.",
+        grammar: "Frequency adverb + verb + time adverb"
+      },
+      {
+        template: "Emma is excellent at math. After school, she ___ finishes her ___ homework.",
+        gaps: [
+          { id: 1, answer: "quickly", type: "adverb" },
+          { id: 2, answer: "math", type: "noun" }
+        ],
+        words: ["quickly", "slowly", "never", "math", "English", "history"],
+        hint: "She's EXCELLENT at math! How fast does an expert work?",
+        explanation: "Experts work QUICKLY (not slowly). She's excellent at MATH specifically.",
+        grammar: "Manner adverbs describe HOW (quickly/slowly/carefully)"
+      },
+      // Time conjunctions with context
+      {
+        template: "I brush my teeth right after waking up. ___ I wake up, I brush my teeth.",
+        gaps: [{ id: 1, answer: "When", type: "other" }],
+        words: ["When", "Before", "After", "If"],
+        hint: "RIGHT AFTER waking = at the same time sequence",
+        explanation: "'When' connects actions that happen together. 'Right after' = immediately when.",
+        grammar: "When = two actions in sequence, happening together"
+      },
+      {
+        template: "She eats breakfast first, then leaves home. She has breakfast ___ she goes to work.",
+        gaps: [{ id: 1, answer: "before", type: "other" }],
+        words: ["before", "after", "when", "while"],
+        hint: "FIRST breakfast, THEN work. Which word means 'earlier than'?",
+        explanation: "'Before' is correct because breakfast happens FIRST, then work comes after.",
+        grammar: "Before = action 1 happens first, action 2 comes later"
+      },
+      {
+        template: "He always completes homework first. ___ he finishes homework, he plays games.",
+        gaps: [{ id: 1, answer: "After", type: "other" }],
+        words: ["After", "Before", "When", "Until"],
+        hint: "Homework FIRST, games SECOND. Work before play!",
+        explanation: "'After' shows homework finishes FIRST, then gaming begins as a reward.",
+        grammar: "After = action 1 completes, then action 2 starts"
+      },
+      // Advanced multi-gap with strong context
+      {
+        template: "My sister is a bookworm who travels a lot. She ___ reads books ___ she travels by train.",
+        gaps: [
+          { id: 1, answer: "always", type: "adverb" },
+          { id: 2, answer: "when", type: "other" }
+        ],
+        words: ["always", "never", "rarely", "when", "before", "if"],
+        hint: "She's a BOOKWORM! What do bookworms do? WHEN does she read?",
+        explanation: "Bookworms ALWAYS read (they love it!). 'When' connects reading with train travel.",
+        grammar: "Frequency adverb + verb + time conjunction"
+      },
+      {
+        template: "I'm allergic to exercise! I ___ exercise ___ I feel tired.",
+        gaps: [
+          { id: 1, answer: "never", type: "adverb" },
+          { id: 2, answer: "when", type: "other" }
+        ],
+        words: ["never", "always", "often", "when", "because", "after"],
+        hint: "ALLERGIC to exercise = hates it! Do allergic people exercise?",
+        explanation: "'Never' is correct (allergic = won't do it). 'When' shows the condition that WOULD make someone exercise (but they still don't).",
+        grammar: "Never = 0% frequency, absolute negation"
+      },
+      {
+        template: "They are excellent language learners. They ___ practice English ___ watching movies.",
+        gaps: [
+          { id: 1, answer: "often", type: "adverb" },
+          { id: 2, answer: "by", type: "other" }
+        ],
+        words: ["often", "never", "rarely", "by", "without", "for"],
+        hint: "EXCELLENT learners practice a lot! What word means 'through the method of'?",
+        explanation: "Excellent learners practice OFTEN (frequently). 'By + watching' shows the method they use.",
+        grammar: "By + verb-ing = shows the method/way of doing something"
+      }
+    ];
+
+    // Initialize
+    function init() {
+      questions = [...questionBank];
+      createStars();
+      loadQuestion();
+      setupWordTypeFilters();
+    }
+
+    // Create starry background
+    function createStars() {
+      const starsContainer = document.getElementById('stars');
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        starsContainer.appendChild(star);
+      }
+    }
+
+    // Setup word type filters
+    function setupWordTypeFilters() {
+      document.querySelectorAll('.type-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentFilter = tab.dataset.type;
+          filterWordBank();
+        });
+      });
+    }
+
+    function filterWordBank() {
+      const tiles = document.querySelectorAll('.word-tile');
+      tiles.forEach(tile => {
+        if (currentFilter === 'all' || tile.classList.contains(currentFilter)) {
+          tile.style.display = 'block';
+        } else {
+          tile.style.display = 'none';
+        }
+      });
+    }
+
+    // Load question
+    function loadQuestion() {
+      currentQuestion = questions[currentQuestionIndex];
+      filledGaps = {};
+      usedWords = {};
+      hintUsed = false;
+      activeGapId = null;
+
+      // Update progress
+      const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+      document.getElementById('progressText').textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+      document.getElementById('progressBar').style.width = `${progress}%`;
+
+      // Render sentence with gaps
+      renderSentence();
+
+      // Render word bank
+      renderWordBank();
+
+      // Reset UI
+      document.getElementById('feedbackBox').classList.remove('show', 'correct', 'wrong');
+      document.getElementById('hintBox').classList.remove('show');
+      document.getElementById('checkBtn').disabled = true;
+      document.getElementById('nextBtn').classList.remove('show');
+
+      // Reset filter
+      currentFilter = 'all';
+      document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+      document.querySelector('.type-tab[data-type="all"]').classList.add('active');
+    }
+
+    function renderSentence() {
+      const template = currentQuestion.template;
+      const parts = template.split('___');
+      
+      let html = '';
+      parts.forEach((part, index) => {
+        html += `<span>${part}</span>`;
+        if (index < currentQuestion.gaps.length) {
+          const gapId = currentQuestion.gaps[index].id;
+          html += `<span class="gap" data-gap-id="${gapId}"></span>`;
+        }
+      });
+
+      document.getElementById('sentenceText').innerHTML = html;
+
+      // Add click listeners to gaps for selection
+      document.querySelectorAll('.gap').forEach(gap => {
+        gap.addEventListener('click', () => selectGap(gap));
+      });
+    }
+
+    function selectGap(gap) {
+      const gapId = gap.dataset.gapId;
+      
+      // Deselect all gaps
+      document.querySelectorAll('.gap').forEach(g => g.classList.remove('active'));
+      
+      // Select this gap
+      gap.classList.add('active');
+      activeGapId = gapId;
+      
+      // Show instruction
+      const hintBox = document.getElementById('hintBox');
+      const hintText = document.getElementById('hintText');
+      hintText.textContent = '👆 Click a word below to fill this gap!';
+      hintBox.classList.add('show');
+    }
+
+    function renderWordBank() {
+      const wordBank = document.getElementById('wordBank');
+      const words = currentQuestion.words;
+
+      // Determine word types
+      const wordTypes = words.map(word => {
+        const gap = currentQuestion.gaps.find(g => g.answer === word);
+        return gap ? gap.type : 'other';
+      });
+
+      wordBank.innerHTML = words.map((word, idx) => `
+        <div class="word-tile ${wordTypes[idx]}" 
+             data-word="${word}"
+             data-type="${wordTypes[idx]}"
+             id="word-${idx}"
+             onclick="fillGapWithWord('${word}')">
+          ${word}
+        </div>
+      `).join('');
+
+      filterWordBank();
+      updateWordBankState();
+    }
+
+    function fillGapWithWord(word) {
+      // Check if word is already used in another gap
+      const wordUsedInGap = Object.keys(filledGaps).find(gapId => filledGaps[gapId] === word);
+      
+      if (wordUsedInGap && wordUsedInGap !== activeGapId) {
+        // Word is used elsewhere, remove it from there first
+        const oldGap = document.querySelector(`[data-gap-id="${wordUsedInGap}"]`);
+        if (oldGap) {
+          oldGap.innerHTML = '';
+          oldGap.classList.remove('filled', 'correct', 'wrong', 'active');
+          delete filledGaps[wordUsedInGap];
+          delete usedWords[wordUsedInGap];
+        }
+      }
+
+      // If no gap selected, select the first empty one
+      if (!activeGapId) {
+        const firstEmptyGap = document.querySelector('.gap:not(.filled)');
+        if (firstEmptyGap) {
+          selectGap(firstEmptyGap);
+        } else {
+          // All gaps filled, select first gap
+          const firstGap = document.querySelector('.gap');
+          selectGap(firstGap);
+        }
+      }
+
+      if (!activeGapId) return;
+
+      const activeGap = document.querySelector(`[data-gap-id="${activeGapId}"]`);
+      if (!activeGap) return;
+
+      // Clear previous word if gap was filled
+      if (filledGaps[activeGapId]) {
+        delete usedWords[activeGapId];
+      }
+
+      // Fill the gap
+      activeGap.innerHTML = `<span class="gap-word">${word}</span>`;
+      activeGap.classList.add('filled');
+      activeGap.classList.remove('active');
+      filledGaps[activeGapId] = word;
+      usedWords[activeGapId] = word;
+
+      // Move to next empty gap automatically
+      const nextEmptyGap = document.querySelector('.gap:not(.filled)');
+      if (nextEmptyGap) {
+        selectGap(nextEmptyGap);
+      } else {
+        // All gaps filled
+        activeGapId = null;
+        document.querySelectorAll('.gap').forEach(g => g.classList.remove('active'));
+        document.getElementById('hintBox').classList.remove('show');
+      }
+
+      updateWordBankState();
+      checkIfComplete();
+    }
+
+    function updateWordBankState() {
+      const usedWordsList = Object.values(filledGaps);
+      
+      document.querySelectorAll('.word-tile').forEach(tile => {
+        const word = tile.dataset.word;
+        
+        if (usedWordsList.includes(word)) {
+          tile.classList.add('selected');
+        } else {
+          tile.classList.remove('selected');
+        }
+      });
+    }
+
+    function checkIfComplete() {
+      const allFilled = currentQuestion.gaps.every(gap => filledGaps[gap.id]);
+      document.getElementById('checkBtn').disabled = !allFilled;
+    }
+
+    function showHint() {
+      const hintBox = document.getElementById('hintBox');
+      const hintText = document.getElementById('hintText');
+      
+      hintText.textContent = '💡 ' + currentQuestion.hint;
+      hintBox.classList.add('show');
+      hintUsed = true;
+    }
+
+    function checkAnswer() {
+      let allCorrect = true;
+      let correctCount = 0;
+
+      currentQuestion.gaps.forEach(gap => {
+        const gapElement = document.querySelector(`[data-gap-id="${gap.id}"]`);
+        const userAnswer = filledGaps[gap.id];
+
+        if (userAnswer === gap.answer) {
+          gapElement.classList.add('correct');
+          gapElement.classList.remove('wrong');
+          correctCount++;
+        } else {
+          gapElement.classList.add('wrong');
+          gapElement.classList.remove('correct');
+          allCorrect = false;
+        }
+      });
+
+      // Show feedback
+      const feedbackBox = document.getElementById('feedbackBox');
+      feedbackBox.classList.add('show');
+
+      if (allCorrect) {
+        feedbackBox.classList.add('correct');
+        feedbackBox.classList.remove('wrong');
+        
+        const points = hintUsed ? 5 : 10;
+        score += points;
+        streak++;
+        perfectCount++;
+        bestStreak = Math.max(bestStreak, streak);
+
+        document.getElementById('feedbackTitle').innerHTML = `✓ Perfect! +${points} points`;
+        document.getElementById('feedbackText').textContent = currentQuestion.explanation;
+        document.getElementById('grammarNote').innerHTML = `💡 <strong>${currentQuestion.grammar}</strong>`;
+
+        // Show combo meter
+        if (streak >= 3) {
+          document.getElementById('comboMeter').classList.add('active');
+        }
+
+        createConfetti();
+        document.getElementById('nextBtn').classList.add('show');
+      } else {
+        feedbackBox.classList.add('wrong');
+        feedbackBox.classList.remove('correct');
+        
+        streak = 0;
+        document.getElementById('comboMeter').classList.remove('active');
+
+        document.getElementById('feedbackTitle').innerHTML = `⚠️ Not quite! ${correctCount}/${currentQuestion.gaps.length} correct`;
+        document.getElementById('feedbackText').textContent = currentQuestion.explanation;
+        document.getElementById('grammarNote').innerHTML = `💡 <strong>${currentQuestion.grammar}</strong>`;
+      }
+
+      updateStats();
+      document.getElementById('checkBtn').style.display = 'none';
+    }
+
+    function createConfetti() {
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.style.position = 'fixed';
+          confetti.style.width = '10px';
+          confetti.style.height = '10px';
+          confetti.style.background = ['#C9A961', '#1DD3C0', '#8B5CF6'][Math.floor(Math.random() * 3)];
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.top = '-10px';
+          confetti.style.zIndex = '9999';
+          confetti.style.borderRadius = '50%';
+          confetti.style.pointerEvents = 'none';
+          
+          const animation = confetti.animate([
+            { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+            { transform: `translateY(100vh) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+          ], {
+            duration: 3000,
+            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          });
+          
+          document.body.appendChild(confetti);
+          animation.onfinish = () => confetti.remove();
+        }, i * 50);
+      }
+    }
+
+    function updateStats() {
+      document.getElementById('scoreValue').textContent = score;
+      document.getElementById('streakValue').textContent = streak;
+      document.getElementById('perfectValue').textContent = perfectCount;
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion();
+        document.getElementById('checkBtn').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        showResults();
+      }
+    }
+
+    function showResults() {
+      document.getElementById('quizContent').style.display = 'none';
+      document.getElementById('resultsScreen').classList.add('show');
+
+      const accuracy = Math.round((perfectCount / questions.length) * 100);
+
+      document.getElementById('finalScore').textContent = score;
+      document.getElementById('finalRatio').textContent = `${perfectCount}/${questions.length} Perfect`;
+      document.getElementById('accuracyValue').textContent = `${accuracy}%`;
+      document.getElementById('bestStreakValue').textContent = bestStreak;
+      document.getElementById('perfectCountValue').textContent = perfectCount;
+
+      // Set results icon
+      if (accuracy === 100) {
+        document.getElementById('resultsIcon').textContent = '🏆';
+        document.getElementById('resultsScreen').querySelector('.results-title').textContent = 'Perfect Master!';
+        createConfetti();
+        createConfetti();
+        createConfetti();
+      } else if (accuracy >= 80) {
+        document.getElementById('resultsIcon').textContent = '🎉';
+      } else if (accuracy >= 60) {
+        document.getElementById('resultsIcon').textContent = '👍';
+      } else {
+        document.getElementById('resultsIcon').textContent = '💪';
+        document.getElementById('resultsScreen').querySelector('.results-title').textContent = 'Keep Practicing!';
+      }
+    }
+
+    function restartQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      streak = 0;
+      bestStreak = 0;
+      perfectCount = 0;
+      startTime = Date.now();
+
+      document.getElementById('quizContent').style.display = 'block';
+      document.getElementById('resultsScreen').classList.remove('show');
+      document.getElementById('comboMeter').classList.remove('active');
+
+      loadQuestion();
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
