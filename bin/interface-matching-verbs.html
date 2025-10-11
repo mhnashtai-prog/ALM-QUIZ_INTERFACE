@@ -148,7 +148,11 @@
     .column {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0;
+    }
+    
+    .column > *:not(:last-child) {
+      margin-bottom: 0.75rem;
     }
 
     .column-title {
@@ -174,6 +178,7 @@
       justify-content: center;
       min-height: 60px;
       position: relative;
+      margin-bottom: 0.75rem;
     }
 
     .match-item.fixed {
@@ -242,6 +247,7 @@
       justify-content: center;
       transition: all 0.3s;
       background: rgba(0, 0, 0, 0.2);
+      margin-bottom: 0;
     }
 
     .drop-zone.drag-over {
@@ -296,6 +302,15 @@
     .btn.primary {
       background: rgba(201, 169, 97, 0.2);
       color: #C9A961;
+      border: 2px solid #C9A961;
+    }
+
+    .btn.primary:hover {
+      background: rgba(201, 169, 97, 0.3);
+      box-shadow: 
+        0 0 20px rgba(201, 169, 97, 0.4),
+        8px 8px 16px #000000,
+        -8px -8px 16px #2a2a2a;
     }
 
     .btn:disabled {
@@ -400,7 +415,7 @@
     <div class="header">
       <h1>INTUITY</h1>
       <p class="subtitle">Match the verbs with their objects</p>
-      <p class="character-name"><span id="characterEmoji">👧</span> <span id="characterName">SARAH</span> - Habitual Actions</p>
+      <p class="character-name"><span id="characterEmoji">👧</span> <span id="characterName">SARAH</span> - <span id="categoryTitle">Habitual Actions</span></p>
     </div>
 
     <div class="progress-bar">
@@ -433,42 +448,68 @@
   </div>
 
   <script>
-    const characters = {
-      sarah: {
-        name: 'SARAH',
-        emoji: '👧',
-        habitual: [
-          { card: 1, pairs: [
-            { verb: 'drinks', object: 'coffee/tea', emoji: '🥤' },
-            { verb: 'eats', object: 'breakfast', emoji: '🍳' },
-            { verb: 'takes', object: 'the bus', emoji: '🚌' },
-            { verb: 'checks', object: 'her phone', emoji: '📱' },
-            { verb: 'does', object: 'homework', emoji: '📚' }
-          ]},
-          { card: 2, pairs: [
-            { verb: 'watches', object: 'videos', emoji: '📺' },
-            { verb: 'listens', object: 'to music', emoji: '🎵' },
-            { verb: 'reads', object: 'books', emoji: '📖' },
-            { verb: 'writes', object: 'essays', emoji: '✍️' },
-            { verb: 'studies', object: 'grammar', emoji: '🎓' }
-          ]},
-          { card: 3, pairs: [
-            { verb: 'attends', object: 'classes', emoji: '🏫' },
-            { verb: 'uses', object: 'apps', emoji: '📲' },
-            { verb: 'wears', object: 'glasses', emoji: '👓' },
-            { verb: 'carries', object: 'a backpack', emoji: '🎒' },
-            { verb: 'asks', object: 'questions', emoji: '❓' }
-          ]},
-          { card: 4, pairs: [
-            { verb: 'answers', object: 'correctly', emoji: '✅' },
-            { verb: 'makes', object: 'friends', emoji: '👥' },
-            { verb: 'keeps', object: 'a diary', emoji: '📔' },
-            { verb: 'follows', object: 'rules', emoji: '📋' },
-            { verb: 'joins', object: 'clubs', emoji: '🎯' }
-          ]}
-        ]
+    // Read URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const characterParam = urlParams.get('character') || 'sarah';
+    const categoryParam = urlParams.get('category') || 'habitual';
+
+    // Load data from sessionStorage
+    let quizData = null;
+    let cardsData = [];
+    
+    try {
+      const storedData = sessionStorage.getItem('quizData');
+      if (storedData) {
+        quizData = JSON.parse(storedData);
+        
+        // Update header with character info
+        document.getElementById('characterEmoji').textContent = quizData.characterEmoji;
+        document.getElementById('characterName').textContent = quizData.character;
+        document.getElementById('categoryTitle').textContent = quizData.cartTitle;
+        
+        // Split verbs into 4 cards (5 verbs each)
+        const allVerbs = quizData.verbs;
+        cardsData = [
+          { card: 1, pairs: allVerbs.slice(0, 5) },
+          { card: 2, pairs: allVerbs.slice(5, 10) },
+          { card: 3, pairs: allVerbs.slice(10, 15) },
+          { card: 4, pairs: allVerbs.slice(15, 20) }
+        ];
       }
-    };
+    } catch (error) {
+      console.error('Error loading data:', error);
+      // Fallback to default data if sessionStorage fails
+      cardsData = [
+        { card: 1, pairs: [
+          { verb: 'drinks', object: 'coffee/tea', emoji: '🥤' },
+          { verb: 'eats', object: 'breakfast', emoji: '🍳' },
+          { verb: 'takes', object: 'the bus', emoji: '🚌' },
+          { verb: 'checks', object: 'phone', emoji: '📱' },
+          { verb: 'does', object: 'homework', emoji: '📚' }
+        ]},
+        { card: 2, pairs: [
+          { verb: 'watches', object: 'videos', emoji: '📺' },
+          { verb: 'listens', object: 'to music', emoji: '🎵' },
+          { verb: 'reads', object: 'books', emoji: '📖' },
+          { verb: 'writes', object: 'essays', emoji: '✍️' },
+          { verb: 'studies', object: 'grammar', emoji: '🎓' }
+        ]},
+        { card: 3, pairs: [
+          { verb: 'attends', object: 'classes', emoji: '🏫' },
+          { verb: 'uses', object: 'apps', emoji: '📲' },
+          { verb: 'wears', object: 'glasses', emoji: '👓' },
+          { verb: 'carries', object: 'backpack', emoji: '🎒' },
+          { verb: 'asks', object: 'questions', emoji: '❓' }
+        ]},
+        { card: 4, pairs: [
+          { verb: 'answers', object: 'correctly', emoji: '✅' },
+          { verb: 'makes', object: 'friends', emoji: '👥' },
+          { verb: 'keeps', object: 'diary', emoji: '📔' },
+          { verb: 'follows', object: 'rules', emoji: '📋' },
+          { verb: 'joins', object: 'clubs', emoji: '🎯' }
+        ]}
+      ];
+    }
 
     let currentCardIndex = 0;
     let currentMatches = {};
@@ -476,7 +517,7 @@
     let draggedElement = null;
 
     function loadCard() {
-      const cardData = characters.sarah.habitual[currentCardIndex];
+      const cardData = cardsData[currentCardIndex];
       const pairs = cardData.pairs;
       
       currentMatches = {};
@@ -631,7 +672,7 @@
 
     function checkAnswers() {
       let correct = 0;
-      const totalPairs = characters.sarah.habitual[currentCardIndex].pairs.length;
+      const totalPairs = cardsData[currentCardIndex].pairs.length;
       
       document.querySelectorAll('.drop-zone').forEach(zone => {
         const verbIndex = zone.dataset.verbIndex;
@@ -659,6 +700,7 @@
         showCelebration('🎉');
         updateProgress();
         renderNavigation();
+        checkAllCardsComplete();
       } else {
         cardScores[currentCardIndex] = Math.round((correct / totalPairs) * 100);
         updateProgress();
@@ -732,8 +774,35 @@
       }, 1000);
     }
 
+    function checkAllCardsComplete() {
+      const allComplete = cardScores.every(score => score === 100);
+      
+      if (allComplete && !document.getElementById('quizBtn')) {
+        // Add "Continue to Quiz" button
+        const controlsDiv = document.querySelector('.controls');
+        const quizBtn = document.createElement('button');
+        quizBtn.id = 'quizBtn';
+        quizBtn.className = 'btn primary';
+        quizBtn.style.animation = 'matchPulse 1s ease infinite';
+        quizBtn.innerHTML = '🎓 Continue to Quiz →';
+        quizBtn.onclick = proceedToQuiz;
+        controlsDiv.appendChild(quizBtn);
+        
+        showCelebration('🏆');
+      }
+    }
+
+    function proceedToQuiz() {
+      // Mark matching game as complete
+      sessionStorage.setItem('matchingComplete', 'true');
+      
+      // Redirect to quiz interface with same parameters
+      window.location.href = `quiz-interface-mode2.html?character=${characterParam}&category=${categoryParam}`;
+    }
+
     function goBack() {
-      alert('← Returning to main carousel with your scores saved!');
+      // Return to landing page
+      window.location.href = 'landing-page-interface-4-boxes.html';
     }
 
     document.addEventListener('keydown', (e) => {
