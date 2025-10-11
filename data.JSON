@@ -1,1 +1,713 @@
+{
+  "metadata": {
+    "version": "5.1",
+    "title": "INTUITY Grammar System",
+    "subtitle": "Intuitive & Immersive Grammar Practice",
+    "author": "Majid Nashtai",
+    "totalModes": 6,
+    "questionsPerMode": 10,
+    "lastUpdated": "2025-10-11"
+  },
+  
+  "modes": {
+    "context_masters": {
+      "id": "context_masters",
+      "title": "Context Masters",
+      "icon": "📚",
+      "description": "Read stories and answer comprehension questions",
+      "color": "#10B981",
+      "exercises": [
+        {
+          "id": "cm_001",
+          "story": "Every morning, Sarah wakes up at 6:30am. She brushes her teeth and eats breakfast with her family. Today is different - she's running late because she can't find her shoes!",
+          "questions": [
+            {
+              "question": "What time does Sarah USUALLY wake up?",
+              "options": ["6:30am", "7:00am", "8:00am", "6:00am"],
+              "correct": "6:30am",
+              "grammarFocus": "Present Simple for habits (wakes = every day)"
+          ]
+    }
+  }
+},
+            {
+              "question": "What's happening TODAY that's different?",
+              "options": ["She's eating slowly", "She's running late", "She's sick", "She's early"],
+              "correct": "She's running late",
+              "grammarFocus": "Present Continuous for NOW (is running = temporary)"
+            }
+          ]
+        },
+        {
+          "id": "cm_002",
+          "story": "Tom plays video games every weekend. He loves action games. Right now, he's playing a new racing game with his friends online. They're having so much fun!",
+          "questions": [
+            {
+              "question": "When does Tom play video games?",
+              "options": ["Every day", "Every weekend", "Never", "Only Mondays"],
+              "correct": "Every weekend",
+              "grammarFocus": "Present Simple for routines (plays every weekend)"
+            },
+            {
+              "question": "What's Tom doing RIGHT NOW?",
+              "options": ["Sleeping", "Playing online", "Studying", "Cooking"],
+              "correct": "Playing online",
+              "grammarFocus": "Present Continuous for action in progress"
+            }
+          ]
+        },
+        {
+          "id": "cm_003",
+          "story": "My sister studies math every evening after dinner. She wants to become an engineer. Tonight she isn't studying - she's watching a documentary about space instead!",
+          "questions": [
+            {
+              "question": "What does your sister study every evening?",
+              "options": ["English", "Math", "Science", "History"],
+              "correct": "Math",
+              "grammarFocus": "Present Simple for regular habits"
+            },
+            {
+              "question": "Why ISN'T she studying tonight?",
+              "options": ["She's tired", "She's watching TV", "She's sick", "She finished"],
+              "correct": "She's watching TV",
+              "grammarFocus": "Present Continuous negative (isn't studying)"
+            }
+          ]
+        },
+        {
+          "id": "cm_004",
+          "story": "Dad cooks dinner every Sunday. He makes amazing pasta with fresh tomatoes and herbs. But today he's tired, so Mom is cooking instead. She's making pizza from scratch!",
+          "questions": [
+            {
+              "question": "Who USUALLY cooks on Sundays?",
+              "options": ["Mom", "Dad", "Sister", "Brother"],
+              "correct": "Dad",
+              "grammarFocus": "Present Simple for who does what regularly"
+            },
+            {
+              "question": "Why is MOM cooking today?",
+              "options": ["She's hungry", "Dad is tired", "It's her birthday", "She loves pizza"],
+              "correct": "Dad is tired",
+              "grammarFocus": "Present Continuous for temporary change"
+            }
+          ]
+        },
+        {
+          "id": "cm_005",
+          "story": "I usually walk to school with my best friend Emma. We talk about everything - homework, movies, music. Today Emma isn't here. She's visiting her grandmother in another city.",
+          "questions": [
+            {
+              "question": "How do you USUALLY get to school?",
+              "options": ["By bus", "Walk", "By car", "By bike"],
+              "correct": "Walk",
+              "grammarFocus": "Present Simple for daily routine"
+            },
+            {
+              "question": "Where is Emma TODAY?",
+              "options": ["At school", "At home", "Another city", "At the park"],
+              "correct": "Another city",
+              "grammarFocus": "Present Continuous for temporary situation"
+            }
+          ]
+        },
+        {
+          "id": "cm_006",
+          "story": "My brother listens to rock music every night before bed. It helps him relax. Right now, he's listening to a new album by his favorite band and singing along loudly!",
+          "questions": [
+            {
+              "question": "WHEN does he listen to music?",
+              "options": ["Morning", "Afternoon", "Every night", "Never"],
+              "correct": "Every night",
+              "grammarFocus": "Present Simple + time expression"
+            },
+            {
+              "question": "What's he doing while listening NOW?",
+              "options": ["Sleeping", "Studying", "Singing along", "Dancing"],
+              "correct": "Singing along",
+              "grammarFocus": "Present Continuous for simultaneous actions"
+            }
+          ]
+        },
+        {
+          "id": "cm_007",
+          "story": "We clean our room every Saturday morning. It usually takes two hours. This Saturday we aren't cleaning - we're going to the beach instead! The weather is perfect.",
+          "questions": [
+            {
+              "question": "WHEN do you normally clean your room?",
+              "options": ["Every day", "Every Saturday", "Never", "Every Friday"],
+              "correct": "Every Saturday",
+              "grammarFocus": "Present Simple for regular schedule"
+            },
+            {
+              "question": "What are you doing THIS Saturday?",
+              "options": ["Cleaning", "Going to beach", "Studying", "Shopping"],
+              "correct": "Going to beach",
+              "grammarFocus": "Present Continuous for plans today"
+            }
+          ]
+        },
+        {
+          "id": "cm_008",
+          "story": "My teacher always arrives at school before 8am. She prepares lessons and organizes materials. Today she's arriving late because her car broke down. She's taking the bus.",
+          "questions": [
+            {
+              "question": "Does the teacher USUALLY arrive early?",
+              "options": ["Yes", "No", "Sometimes", "Never"],
+              "correct": "Yes",
+              "grammarFocus": "Present Simple + frequency adverb (always)"
+            },
+            {
+              "question": "WHY is she late today?",
+              "options": ["She's sick", "Car problem", "She forgot", "Traffic"],
+              "correct": "Car problem",
+              "grammarFocus": "Present Continuous for unexpected situation"
+            }
+          ]
+        },
+        {
+          "id": "cm_009",
+          "story": "I often chat with my friends online after homework. We share memes, funny videos, and talk about our day. Tonight I'm not chatting - I'm watching a movie with my family instead.",
+          "questions": [
+            {
+              "question": "What do you OFTEN do after homework?",
+              "options": ["Sleep", "Chat online", "Play games", "Cook"],
+              "correct": "Chat online",
+              "grammarFocus": "Present Simple + frequency adverb (often)"
+            },
+            {
+              "question": "What are you doing TONIGHT?",
+              "options": ["Chatting", "Watching movie", "Sleeping", "Reading"],
+              "correct": "Watching movie",
+              "grammarFocus": "Present Continuous for tonight's plan"
+            }
+          ]
+        },
+        {
+          "id": "cm_010",
+          "story": "My dog barks at every visitor who comes to the door. He thinks he's protecting us! Right now, the mailman is knocking and my dog is barking loudly at him.",
+          "questions": [
+            {
+              "question": "What does the dog ALWAYS do when visitors come?",
+              "options": ["Barks", "Sleeps", "Runs", "Hides"],
+              "correct": "Barks",
+              "grammarFocus": "Present Simple for typical behavior"
+            },
+            {
+              "question": "What's happening RIGHT NOW?",
+              "options": ["Dog is sleeping", "Dog is eating", "Dog is barking", "Dog is playing"],
+              "correct": "Dog is barking",
+              "grammarFocus": "Present Continuous for current action"
+            }
+          ]
+        }
+      ]
+    },
 
+    "context_detective": {
+      "id": "context_detective",
+      "title": "Context Detective",
+      "icon": "🕵️",
+      "description": "Analyze sentences and discover grammar patterns",
+      "color": "#C9A961",
+      "exercises": [
+        {
+          "id": "cd_001",
+          "sentence": "The sun rises in the east every morning.",
+          "question": "Is this about RIGHT NOW or ALWAYS TRUE?",
+          "options": ["Right now only", "Always true ✅", "Yesterday", "Sometimes true"],
+          "correct": "Always true ✅",
+          "explanation": "Facts and universal truths use Present Simple (no -ing)",
+          "hint": "Think: Does the sun rise in the east just today, or EVERY day?"
+        },
+        {
+          "id": "cd_002",
+          "sentence": "Listen! Someone is knocking at the door.",
+          "question": "WHY did the speaker say 'Listen!'?",
+          "options": [
+            "It happens every day",
+            "Someone is knocking RIGHT NOW ✅",
+            "It happened yesterday",
+            "It's a weekly routine"
+          ],
+          "correct": "Someone is knocking RIGHT NOW ✅",
+          "explanation": "LISTEN! = Pay attention NOW. Present Continuous for actions happening at this moment",
+          "hint": "When someone says 'Listen!' they want you to hear something happening NOW"
+        },
+        {
+          "id": "cd_003",
+          "sentence": "I usually walk to school, but today I'm taking the bus.",
+          "question": "What's DIFFERENT about today?",
+          "options": [
+            "Nothing is different",
+            "Today is a TEMPORARY change ✅",
+            "Walking is temporary",
+            "Both are permanent habits"
+          ],
+          "correct": "Today is a TEMPORARY change ✅",
+          "explanation": "USUALLY WALK = habit (Present Simple). TODAY TAKING = temporary (Present Continuous)",
+          "hint": "Look for 'usually' (habit) vs 'today' (temporary change)"
+        },
+        {
+          "id": "cd_004",
+          "sentence": "My brother plays video games every night.",
+          "question": "How OFTEN does this happen?",
+          "options": [
+            "Right now only",
+            "Every night (regular habit) ✅",
+            "Just once",
+            "Never"
+          ],
+          "correct": "Every night (regular habit) ✅",
+          "explanation": "EVERY NIGHT = frequency word showing habit. Present Simple for routines.",
+          "hint": "'Every night' tells you it's a REGULAR ROUTINE"
+        },
+        {
+          "id": "cd_005",
+          "sentence": "I love chocolate! 🍫",
+          "question": "Can we say 'I'm loving chocolate'?",
+          "options": [
+            "Yes, both are correct",
+            "No, LOVE is a feeling (not an action) ✅",
+            "Only in questions",
+            "Only in negatives"
+          ],
+          "correct": "No, LOVE is a feeling (not an action) ✅",
+          "explanation": "LOVE = stative verb (feeling). Feelings don't use -ing. Say: I LOVE, not I'M LOVING",
+          "hint": "Can you SEE someone loving? No! It's internal, so no -ing"
+        },
+        {
+          "id": "cd_006",
+          "sentence": "I think pizza is delicious. vs I'm thinking about pizza right now.",
+          "question": "Why is ONE correct with -ing and ONE without?",
+          "options": [
+            "Both are wrong",
+            "THINK (opinion) = no -ing. THINK ABOUT (mental action) = -ing ✅",
+            "They mean the same",
+            "Only the first is correct"
+          ],
+          "correct": "THINK (opinion) = no -ing. THINK ABOUT (mental action) = -ing ✅",
+          "explanation": "I THINK = opinion (stative, no -ing). I'M THINKING ABOUT = mental process (dynamic, -ing OK)",
+          "hint": "Opinion = Present Simple. Mental process happening now = Present Continuous"
+        },
+        {
+          "id": "cd_007",
+          "sentences": [
+            "A) She always drinks coffee in the morning.",
+            "B) She is drinking coffee right now."
+          ],
+          "question": "Which word tells you it's a HABIT?",
+          "options": ["drinks", "always ✅", "coffee", "now"],
+          "correct": "always ✅",
+          "explanation": "ALWAYS = frequency word signaling habit → Present Simple",
+          "hint": "Frequency words (always/usually/often/sometimes/never) = habits = Present Simple"
+        },
+        {
+          "id": "cd_008",
+          "sentence": "At the moment, I'm studying for my math test.",
+          "question": "Which phrase tells you it's happening NOW?",
+          "options": ["studying", "math test", "at the moment ✅", "for"],
+          "correct": "at the moment ✅",
+          "explanation": "AT THE MOMENT = time signal for NOW → Present Continuous",
+          "hint": "Time signals for NOW: now, right now, at the moment, currently"
+        },
+        {
+          "id": "cd_009",
+          "story": "Sarah wakes up at 7am. She eats breakfast, brushes her teeth, and catches the 8:15 bus to school.",
+          "question": "Are these actions describing a ROUTINE or ONE SPECIFIC DAY?",
+          "options": ["One specific day only", "Her daily routine ✅", "Future plans", "Past events"],
+          "correct": "Her daily routine ✅",
+          "explanation": "No time signals like 'today' or 'right now' + sequence of actions = routine description",
+          "hint": "When describing someone's typical day (no 'today'), use Present Simple"
+        },
+        {
+          "id": "cd_010",
+          "story": "Quick! Hide! Mom is coming up the stairs and we're making a huge mess in the kitchen!",
+          "question": "Why are both verbs using -ing?",
+          "options": [
+            "They're habits",
+            "Both actions are happening RIGHT NOW ✅",
+            "They're facts",
+            "They're preferences"
+          ],
+          "correct": "Both actions are happening RIGHT NOW ✅",
+          "explanation": "QUICK! HIDE! = urgency words signal immediate action → Present Continuous",
+          "hint": "Urgency words (Quick! Hurry! Watch out!) = something happening NOW"
+        }
+      ]
+    },
+
+    "gap_master": {
+      "id": "gap_master",
+      "title": "Gap Master",
+      "icon": "✏️",
+      "description": "Fill in the gaps with correct verb forms",
+      "color": "#3B82F6",
+      "exercises": [
+        {
+          "id": "gm_001",
+          "question": "Every morning, I ___ (wake) up at 7am, ___ (brush) my teeth, ___ (eat) breakfast, and then I ___ (leave) for school.",
+          "answers": ["wake", "brush", "eat", "leave"],
+          "difficulty": "basic"
+        },
+        {
+          "id": "gm_002",
+          "question": "Shh! The baby ___ (sleep), Mom ___ (read) a book, Dad ___ (cook) dinner, and I ___ (do) my homework quietly.",
+          "answers": ["is sleeping", "is reading", "is cooking", "am doing"],
+          "difficulty": "intermediate",
+          "hint": "Right NOW = Present Continuous (am/is/are + -ing)"
+        },
+        {
+          "id": "gm_003",
+          "question": "I usually ___ (walk) to school, but today I ___ (take) the bus because it ___ (rain) and I ___ (not/want) to get wet.",
+          "answers": ["walk", "am taking", "is raining", "don't want"],
+          "difficulty": "advanced",
+          "hint": "USUALLY = habit (Simple). TODAY = temporary (Continuous)"
+        },
+        {
+          "id": "gm_004",
+          "question": "My dad ___ (work) as a teacher. He ___ (teach) math every weekday, but right now he ___ (not/teach) because it ___ (be) summer vacation.",
+          "answers": ["works", "teaches", "isn't teaching", "is"],
+          "difficulty": "advanced",
+          "hint": "Job = Simple. Right now = Continuous"
+        },
+        {
+          "id": "gm_005",
+          "question": "I ___ (not/like) horror movies, my sister ___ (not/watch) TV often, and we ___ (not/go) to the cinema much. We ___ (prefer) reading books.",
+          "answers": ["don't like", "doesn't watch", "don't go", "prefer"],
+          "difficulty": "intermediate",
+          "hint": "I/We/They = don't. He/She/It = doesn't"
+        },
+        {
+          "id": "gm_006",
+          "question": "Right now, he ___ (not/study), she ___ (not/work), and they ___ (not/listen) to the teacher. Everyone ___ (look) out the window!",
+          "answers": ["isn't studying", "isn't working", "aren't listening", "is looking"],
+          "difficulty": "intermediate",
+          "hint": "am/is/are + NOT + verb-ing"
+        },
+        {
+          "id": "gm_007",
+          "question": "___ (you/like) pizza? ___ (your sister/eat) vegetables? ___ (your family/cook) at home often? ___ (you/order) takeout sometimes?",
+          "answers": ["Do you like", "Does your sister eat", "Does your family cook", "Do you order"],
+          "difficulty": "intermediate",
+          "hint": "Questions: Do/Does + subject + verb"
+        },
+        {
+          "id": "gm_008",
+          "question": "___ (you/study) right now? ___ (your brother/play) video games? ___ (your parents/work) from home today? ___ (anyone/listen)?",
+          "answers": ["Are you studying", "Is your brother playing", "Are your parents working", "Is anyone listening"],
+          "difficulty": "intermediate",
+          "hint": "Questions: Am/Is/Are + subject + verb-ing"
+        },
+        {
+          "id": "gm_009",
+          "question": "She ___ (love) chocolate, ___ (prefer) dark chocolate, and ___ (think) milk chocolate ___ (be) too sweet. Right now she ___ (eat) a chocolate bar!",
+          "answers": ["loves", "prefers", "thinks", "is", "is eating"],
+          "difficulty": "advanced",
+          "hint": "Feelings = Simple (no -ing). Actions = Continuous"
+        },
+        {
+          "id": "gm_010",
+          "question": "Today I ___ (not/feel) well, so I ___ (not/go) to school. I ___ (stay) home, ___ (rest) in bed, and ___ (watch) movies.",
+          "answers": ["don't feel", "am not going", "am staying", "am resting", "am watching"],
+          "difficulty": "advanced",
+          "hint": "Feeling = Simple. Today's actions = Continuous"
+        }
+      ]
+    },
+
+    "transform_lab": {
+      "id": "transform_lab",
+      "title": "Transform Lab",
+      "icon": "🔄",
+      "description": "Transform sentences from one form to another",
+      "color": "#8B5CF6",
+      "exercises": [
+        {
+          "id": "tl_001",
+          "sentence": "She eats breakfast at 7am.",
+          "type": "Make it NEGATIVE",
+          "correct": "She doesn't eat breakfast at 7am.",
+          "explanation": "Present Simple negative: doesn't + base verb",
+          "difficulty": "basic"
+        },
+        {
+          "id": "tl_002",
+          "sentence": "They are playing football.",
+          "type": "Make it NEGATIVE",
+          "correct": "They aren't playing football.",
+          "explanation": "Present Continuous negative: am/is/are + not + verb-ing",
+          "difficulty": "basic"
+        },
+        {
+          "id": "tl_003",
+          "sentence": "I walk to school every day.",
+          "type": "Make it a YES/NO QUESTION",
+          "correct": "Do you walk to school every day?",
+          "explanation": "Present Simple question: Do/Does + subject + base verb",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "tl_004",
+          "sentence": "He is watching TV right now.",
+          "type": "Make it a YES/NO QUESTION",
+          "correct": "Is he watching TV right now?",
+          "explanation": "Present Continuous question: Am/Is/Are + subject + verb-ing",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "tl_005",
+          "sentence": "My sister doesn't like chocolate.",
+          "type": "Make it POSITIVE",
+          "correct": "My sister likes chocolate.",
+          "explanation": "Remove doesn't and add -s to the verb (3rd person singular)",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "tl_006",
+          "sentence": "We aren't studying for the test.",
+          "type": "Make it POSITIVE",
+          "correct": "We are studying for the test.",
+          "explanation": "Remove 'not' from present continuous",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "tl_007",
+          "sentence": "Do they play video games?",
+          "type": "Make it a STATEMENT (positive)",
+          "correct": "They play video games.",
+          "explanation": "Remove 'Do' and keep base verb",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "tl_008",
+          "sentence": "Is she cooking dinner?",
+          "type": "Make it a STATEMENT (positive)",
+          "correct": "She is cooking dinner.",
+          "explanation": "Keep is + verb-ing, just change word order",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "tl_009",
+          "sentence": "I usually take the bus.",
+          "type": "Change to PRESENT CONTINUOUS for TODAY",
+          "correct": "I am taking the bus today.",
+          "explanation": "Habit → temporary action: use am/is/are + verb-ing",
+          "difficulty": "advanced"
+        },
+        {
+          "id": "tl_010",
+          "sentence": "He's working from home this week.",
+          "type": "Change to PRESENT SIMPLE for REGULAR HABIT",
+          "correct": "He works from home.",
+          "explanation": "Temporary action → permanent habit: use base verb + s",
+          "difficulty": "advanced"
+        }
+      ]
+    },
+
+    "sentence_builder": {
+      "id": "sentence_builder",
+      "title": "Sentence Builder",
+      "icon": "🗝️",
+      "description": "Build sentences or put them in correct order",
+      "color": "#F59E0B",
+      "exercises": [
+        {
+          "id": "sb_001",
+          "type": "build",
+          "words": ["I", "breakfast", "every", "eat", "morning"],
+          "correct": "I eat breakfast every morning",
+          "hint": "Subject + verb + object + time",
+          "difficulty": "basic"
+        },
+        {
+          "id": "sb_002",
+          "type": "build",
+          "words": ["is", "She", "right", "studying", "now"],
+          "correct": "She is studying right now",
+          "hint": "Subject + is + verb-ing + time",
+          "difficulty": "basic"
+        },
+        {
+          "id": "sb_003",
+          "type": "build",
+          "words": ["don't", "I", "like", "coffee"],
+          "correct": "I don't like coffee",
+          "hint": "Subject + don't + base verb + object",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "sb_004",
+          "type": "build",
+          "words": ["playing", "aren't", "They", "games", "video"],
+          "correct": "They aren't playing video games",
+          "hint": "Subject + aren't + verb-ing + object",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "sb_005",
+          "type": "build",
+          "words": ["Does", "school", "to", "walk", "she"],
+          "correct": "Does she walk to school",
+          "hint": "Does + subject + base verb + place",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "sb_006",
+          "type": "sequence",
+          "storyTitle": "Morning Routine",
+          "sentences": [
+            "I wake up at 7am.",
+            "Then I brush my teeth and take a shower.",
+            "After that, I eat breakfast with my family.",
+            "Finally, I leave for school at 8am."
+          ],
+          "correctOrder": [
+            "I wake up at 7am.",
+            "Then I brush my teeth and take a shower.",
+            "After that, I eat breakfast with my family.",
+            "Finally, I leave for school at 8am."
+          ],
+          "hint": "Think about the logical order of morning activities"
+        },
+        {
+          "id": "sb_007",
+          "type": "sequence",
+          "storyTitle": "Right Now",
+          "sentences": [
+            "Mom is cooking dinner in the kitchen.",
+            "Dad is reading the newspaper.",
+            "My brother is playing video games.",
+            "I'm doing my homework."
+          ],
+          "correctOrder": [
+            "Mom is cooking dinner in the kitchen.",
+            "Dad is reading the newspaper.",
+            "My brother is playing video games.",
+            "I'm doing my homework."
+          ],
+          "hint": "Each sentence describes what someone is doing NOW"
+        },
+        {
+          "id": "sb_008",
+          "type": "sequence",
+          "storyTitle": "Weekend Plans",
+          "sentences": [
+            "This Saturday, we're going to the beach.",
+            "We're leaving early in the morning.",
+            "We're taking sandwiches and drinks.",
+            "We're coming back in the evening."
+          ],
+          "correctOrder": [
+            "This Saturday, we're going to the beach.",
+            "We're leaving early in the morning.",
+            "We're taking sandwiches and drinks.",
+            "We're coming back in the evening."
+          ],
+          "hint": "Follow the time sequence from start to finish"
+        },
+        {
+          "id": "sb_009",
+          "type": "sequence",
+          "storyTitle": "Daily Habits",
+          "sentences": [
+            "I always wake up early.",
+            "I usually eat a healthy breakfast.",
+            "I often walk to school with friends.",
+            "I never skip my homework."
+          ],
+          "correctOrder": [
+            "I always wake up early.",
+            "I usually eat a healthy breakfast.",
+            "I often walk to school with friends.",
+            "I never skip my homework."
+          ],
+          "hint": "Notice the frequency words: always, usually, often, never"
+        },
+        {
+          "id": "sb_010",
+          "type": "sequence",
+          "storyTitle": "Temporary vs Permanent",
+          "sentences": [
+            "I live in London.",
+            "But this month, I'm staying with my aunt in Paris.",
+            "I usually speak English at home.",
+            "Right now, I'm practicing my French every day."
+          ],
+          "correctOrder": [
+            "I live in London.",
+            "But this month, I'm staying with my aunt in Paris.",
+            "I usually speak English at home.",
+            "Right now, I'm practicing my French every day."
+          ],
+          "hint": "Permanent facts first, then temporary situations"
+        }
+      ]
+    },
+
+    "real_talk": {
+      "id": "real_talk",
+      "title": "Real Talk",
+      "icon": "💬",
+      "description": "Practice with authentic dialogues and conversations",
+      "color": "#EF4444",
+      "exercises": [
+        {
+          "id": "rt_001",
+          "title": "Coffee Shop Order",
+          "culturalContext": "In English-speaking countries, coffee shops are social hubs. People often use present continuous to talk about their current activities.",
+          "dialogue": [
+            "☕ <strong>Barista:</strong> Hi! What ___ you ___ today? (have)",
+            "👤 <strong>Customer:</strong> I ___ a cappuccino, please. (want)",
+            "☕ <strong>Barista:</strong> Sure! ___ you ___ here or to go? (eat)",
+            "👤 <strong>Customer:</strong> To go. I ___ to work right now. (go)"
+          ],
+          "blanks": [
+            {
+              "options": ["are...having", "do...have", "is...having"],
+              "answer": "are...having"
+            },
+            {
+              "options": ["want", "'m wanting", "wants"],
+              "answer": "want"
+            },
+            {
+              "options": ["Are...eating", "Do...eat", "Is...eating"],
+              "answer": "Are...eating"
+            },
+            {
+              "options": ["go", "'m going", "goes"],
+              "answer": "'m going"
+            }
+          ],
+          "languageFocus": ["Present Continuous for now", "Stative verbs"]
+        },
+        {
+          "id": "rt_002",
+          "title": "Meeting a Friend",
+          "culturalContext": "Small talk about daily routines is common when greeting friends in English.",
+          "dialogue": [
+            "👋 <strong>Anna:</strong> Hey! What ___ you ___ these days? (do)",
+            "😊 <strong>Ben:</strong> Not much. I ___ for my final exams. (study)",
+            "👋 <strong>Anna:</strong> ___ you ___ coffee? I know a great place! (want)",
+            "😊 <strong>Ben:</strong> Sorry, I can't. I ___ time right now. (not/have)"
+          ],
+          "blanks": [
+            {
+              "options": ["are...doing", "do...do", "is...doing"],
+              "answer": "are...doing"
+            },
+            {
+              "options": ["study", "'m studying", "studies"],
+              "answer": "'m studying"
+            },
+            {
+              "options": ["Are...wanting", "Do...want", "Is...wanting"],
+              "answer": "Do...want"
+            },
+            {
+              "options": ["don't have", "'m not having", "doesn't have"],
+              "answer": "don't have"
+            }
+          ],
+          "
